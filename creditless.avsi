@@ -28,8 +28,8 @@ function creditless(clip video, clip opening, clip ending, int "frameInicioAbert
 	temAbertura = (isClip(opening)) ? true : false
 
 	################################################################################## 
-	# Faz ajustes no arquivo de abertura e encerramento para casos onde o arquivo da #
-	# abertura creditless tem frame a mais ou a menos.                               #
+	# TODO - Fazer ajustes no arquivo de abertura e encerramento para casos onde     #
+	# o arquivo da abertura creditless tem frame a mais ou a menos.                  #
 	# Caso a abertura tenha MUITA diferenca, precisa mandar ela trimmada pro script. #
 	##################################################################################
 
@@ -44,19 +44,20 @@ function creditless(clip video, clip opening, clip ending, int "frameInicioAbert
 		previa = video.trim(frameFinalEncerramento, qtdFramesEpisodio)
 
 		return opening + InicioDoepisodio + ending + previa		
-
-	} else if (temIntroducao == true && temEncerramento == false) {
-		introducao = video.trim(0, frameInicioAbertura)
-		InicioDoepisodio = video.trim(frameFinalAbertura, frameInicioEncerramento)
-		
-		return introducao + opening + InicioDoepisodio
-
-	## TODO - Levar as validacoes de tipo de parametros la pra cima, já que é impossível passar null, e o tipo var retorna erro no FrameCount()
-	#} else if (temAbertura == false && temEncerramento == true) {				
-	#	previa = video.trim(frameFinalEncerramento, qtdFramesEpisodio)
-	#	return video + ending + previa	
+	######################################################################################
+	## TODO - Levar as validacoes de tipo de parametros la pra cima, já que é impossível #
+	## passar null, e o tipo var retorna erro no FrameCount()                            #
+	#} else if (temIntroducao == true && temEncerramento == false) {		     #
+	#	introducao = video.trim(0, frameInicioAbertura)                              #
+	#	InicioDoepisodio = video.trim(frameFinalAbertura, frameInicioEncerramento)   #
+	#	                                                                             # 
+	#	return introducao + opening + InicioDoepisodio		                     #
+	#} else if (temAbertura == false && temEncerramento == true) {			     #
+	#	previa = video.trim(frameFinalEncerramento, qtdFramesEpisodio)               #
+	#	return video + ending + previa	                                             #
+	######################################################################################
 	} else {
-		return String("PORRA")
+		BlankClip()
 	}
 	
 }
